@@ -1,6 +1,7 @@
 # ProgrammingLanguage
 
 
+```python
 PROGRAM         = { BLOCK };
 BLOCK           = { STATEMENT };
 STATEMENT       = (λ | ASSIGNMENT | PRINT | WHILE | IF), "\n";
@@ -19,4 +20,5 @@ IDENTIFIER      = LETTER, {LETTER | DIGIT | "_"};
 INT             = DIGIT, {DIGIT};
 STRING          = ( " | ' ), { λ | LETTER | DIGIT }, ( " | ' );
 LETTER          = ( a | ... | z | A | ... | Z );
-DIGIT           = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 );
+DIGIT           = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 );
+```
