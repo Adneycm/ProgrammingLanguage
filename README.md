@@ -4,7 +4,7 @@
 ```python
 PROGRAM         = { BLOCK };
 BLOCK           = { STATEMENT };
-STATEMENT       = (λ | ASSIGNMENT | DISPLAY | WHILE | IF | ROUTINE | EXECUTE | CHECK_AVAILABLITY), "\n";
+STATEMENT       = (λ | ASSIGNMENT | DISPLAY | WHILE | IF | ROUTINE | EXECUTE | AVAILABLITY), "\n";
 ASSIGNMENT      = IDENTIFIER, "=", BOOLEXPRESSION;
 DISPLAY         = "display", "(", BOOLEXPRESSION, ")";
 WHILE           = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
