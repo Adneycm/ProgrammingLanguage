@@ -4,11 +4,14 @@
 ```python
 PROGRAM         = { BLOCK };
 BLOCK           = { STATEMENT };
-STATEMENT       = (λ | ASSIGNMENT | PRINT | WHILE | IF), "\n";
+STATEMENT       = (λ | ASSIGNMENT | DISPLAY | WHILE | IF | ROUTINE | EXECUTE | CHECK_AVAILABLITY), "\n";
 ASSIGNMENT      = IDENTIFIER, "=", BOOLEXPRESSION;
-PRINT           = "print", "(", BOOLEXPRESSION, ")";
-IF              = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
+DISPLAY         = "display", "(", BOOLEXPRESSION, ")";
+WHILE           = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
 IF              = "if", BOOLEXPRESSION, "then", "\n", {STATEMENT}, {"else", "\n", STATEMENT}, "end", "\n";
+ROUTINE         = "routine", IDENTIFIER, "=", "(", "[", {"(",  BOOLEXPRESSION, "," , TIME_NEEDED, ")"}, "]", BOOLEXPRESSION, BOOLEXPRESSION, ")", "\n";
+EXECUTE         = "execute", IDENTIFIER, "->", BOOLEXPRESSION, "\n";
+AVAILABLITY     = "availability", INT
 BOOLEXPRESSION  = BOOLTERM, {"or" BOOLTERM};
 BOOLTERM        = RELEXPRESSION, {"and", RELEXPRESSION};
 RELEXPRESSION   = EXPRESSION, {("==" | ">" | "<"), EXPRESSION};
