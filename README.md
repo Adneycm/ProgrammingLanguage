@@ -23,9 +23,8 @@ INT             = DIGIT, {DIGIT};
 STRING          = {LETTER | DIGIT };
 ```
 
-<div style="background-color:white; padding:10px;border-radius: 12px;">
-  <img src="EBNF.png" alt="Your Image">
-</div>
+![EBNF](EBNF2.png)
+
 
 This is a programming language designed to help users create habits and build a solid routine. Some key points worth noting are:
 
