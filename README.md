@@ -23,6 +23,8 @@ INT             = DIGIT, {DIGIT};
 STRING          = {LETTER | DIGIT };
 ```
 
+![EBNF](EBNF.png)
+
 This is a programming language designed to help users create habits and build a solid routine. Some key points worth noting are:
 
 * The hours of the day are represented as integers, ranging from 0 to 24, where 0 corresponds to the beginning of the day and 24 to the end (midnight).

@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include "parser.tab.h"
 %}
 
 %token ASSIGNMENT LPAREN RPAREN LBRACKET RBRACKET PIPE COMMA ROUTINE AVAILABILITY
