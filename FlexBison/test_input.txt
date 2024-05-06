@@ -1,0 +1,31 @@
+# assignment
+local x
+local y = 1
+x = 2
+
+# display
+display(x)
+
+# routine
+routine rotina_adney
+routine rotina_adney = ([("read book", 1), ("gym", 2), ("study", 4)] | [(0,6), (13,16), (21,24)])
+
+# availability
+availability(rotina_adney, 14)
+
+# while
+while x < 5:
+    x = x + 1
+end
+
+# if
+if x < 10:
+    display("maior")
+end
+
+# if/else
+if x < 10:
+    display("menor")
+else:
+    display("maior")
+end
