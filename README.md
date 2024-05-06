@@ -7,6 +7,12 @@ Routin is a programming language designed to help users create habits and build 
 </p>
 
 
+* #### [EBNF](#EBNF)
+* #### [Flex & Bison](#Flex-&-Bison)
+
+#### <a name="EBNF">EBNF</a> 
+
+
 ```python
 PROGRAM = { BLOCK };
 BLOCK = { STATEMENT };
@@ -78,4 +84,20 @@ end
 
 $19
 $20
+```
+
+#### <a name="Flex-&-Bison">Flex & Bison</a> 
+
+To test the Flex & Bison you can do:
+```sh
+flex scanner.l
+bison -d parser.y
+```
+
+```sh
+gcc lex.yy.c parser.tab.c -o parser -lfl
+```
+
+```sh
+./parser < test_input.txt
 ```
