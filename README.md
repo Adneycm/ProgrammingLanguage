@@ -2,9 +2,9 @@
 
 Routin is a programming language designed to help users create habits and build a solid routine.
 
-<div style="text-align:center">
+<p align="center">
   <img src="Images/Routin.png" alt="Routin" width="240"/>
-</div>
+</p>
 
 
 ```python
