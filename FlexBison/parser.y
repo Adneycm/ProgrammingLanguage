@@ -53,6 +53,7 @@ statement : assignment
           | if
           | routine 
           | availability
+          | NEWLINE
           ;
 
 assignment : IDENTIFIER ASSIGN bexpression NEWLINE

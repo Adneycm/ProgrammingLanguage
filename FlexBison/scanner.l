@@ -80,10 +80,10 @@ NEWLINE \n
 [a-zA-Z_][a-zA-Z0-9_]* { yyval = strdup(yytext); return IDENTIFIER; }
 \"([^\\\"]|\\.)*\"     { yyval = strdup(yytext); return STRING; }
 
+
 #.*?\n  ; /* Ignora comentários de uma linha */
 "\\\n"  ; /* Ignora quebras de linha precedidas por \ */
 
-\t\r\n  ; /* Ignora linhas em branco */
 
 \n      { yyval = strdup(yytext); return NEWLINE; }
 .       { yyval = strdup(yytext); printf("%s",yyval); }
