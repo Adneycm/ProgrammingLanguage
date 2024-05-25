@@ -14,38 +14,28 @@ Routin is a programming language designed to help users create habits and build 
 
 
 ```python
-PROGRAM = { BLOCK };
-BLOCK = { STATEMENT };
+PROGRAM   = { BLOCK };
+BLOCK     = { STATEMENT };
 STATEMENT = (ASSIGNMENT | VARIABLE_DECLARATION | DISPLAY | WHILE | IF | ROUTINE | AVAILABLITY), "\n";
 
-ASSIGNMENT = IDENTIFIER, "=", BOOLEXPRESSION;
-
+ASSIGNMENT           = IDENTIFIER, "=", BOOLEXPRESSION;
 VARIABLE_DECLARATION = "local", IDENTIFIER, [ "=", BOOLEXPRESSION ] ;
+DISPLAY              = "display", "(", BOOLEXPRESSION, ")";
+WHILE                = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
+IF                   = "if", BOOLEXPRESSION, "then", "\n", {STATEMENT}, ["else", "\n", {STATEMENT}], "end", "\n";
+ROUTINE              = "routine", IDENTIFIER, ["=", "(", "[", { ")",BOOLEXPRESSION, ",", INT, "("},"]", "|", "[", { ")",INT, "-", INT, "("}, "]", ")"], "\n";
+AVAILABLITY          = "availability", "(",IDENTIFIER, ",",INT, ")";
 
-DISPLAY = "display", "(", BOOLEXPRESSION, ")";
-
-WHILE           = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
-
-IF              = "if", BOOLEXPRESSION, "then", "\n", {STATEMENT}, ["else", "\n", {STATEMENT}], "end", "\n";
-
-ROUTINE         = "routine", IDENTIFIER, ["=", "(", "[", { ")",BOOLEXPRESSION, ",", INT, "("},"]", "|", "[", { ")",INT, "-", INT, "("}, "]", ")"], "\n";
-
-
-AVAILABLITY     = "availability", "(",IDENTIFIER, ",",INT, ")";
-
-BOOLEXPRESSION  = BOOLTERM, {"or", BOOLTERM};
-BOOLTERM        = RELEXPRESSION, {"and", RELEXPRESSION};
-RELEXPRESSION   = EXPRESSION, {("==" | ">" | "<"), EXPRESSION};
-
-
-EXPRESSION      = TERM, { ("+" | "-"), TERM};
-TERM            = FACTOR, {("*" | "/"), FACTOR};
-FACTOR          = INT | STRING | IDENTIFIER | (("+" | "-" | "!"), FACTOR) | "(", BOOLEXPRESSION, ")" | READ;
-READ            = "read", "(", ")";
-IDENTIFIER      = LETTER, {LETTER | DIGIT | "_"};
-INT             = DIGIT, {DIGIT};
-
-STRING          = {LETTER | DIGIT };
+BOOLEXPRESSION = BOOLTERM, {"or", BOOLTERM};
+BOOLTERM       = RELEXPRESSION, {"and", RELEXPRESSION};
+RELEXPRESSION  = EXPRESSION, {("==" | ">" | "<"), EXPRESSION};
+EXPRESSION     = TERM, { ("+" | "-"), TERM};
+TERM           = FACTOR, {("*" | "/"), FACTOR};
+FACTOR         = INT | STRING | IDENTIFIER | (("+" | "-" | "!"), FACTOR) | "(", BOOLEXPRESSION, ")" | READ;
+READ           = "read", "(", ")";
+IDENTIFIER     = LETTER, {LETTER | DIGIT | "_"};
+INT            = DIGIT, {DIGIT};
+STRING         = {LETTER | DIGIT };
 ```
 
 ![EBNF](Images/EBNF2.png)
