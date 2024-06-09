@@ -1,0 +1,26 @@
+local my_routine
+routine my_routine = ([("read book", 1), ("gym", 2), ("study", 4)] , [(0,6), (13,16), (21,24)])
+
+
+local i = 0
+while i < 25 {
+  if availability(my_routine, i) {
+    print(i)
+  }
+  i = i + 1
+}
+
+print(my_routine)
+
+my_routine.add_task("meeting", 2)
+my_routine.del_task("study")
+
+local j = 0
+while j < 25 {
+  if availability(my_routine, j) {
+    print(j)
+  }
+  j = j + 1
+}
+
+print(my_routine)
