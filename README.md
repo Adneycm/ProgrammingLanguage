@@ -6,25 +6,32 @@ Routin is a programming language designed to help users create habits and build 
   <img src="Images/Routin.png" alt="Routin" width="240"/>
 </p>
 
-
+* #### [About](#About)
 * #### [EBNF](#EBNF)
+* #### [Code Example](#Code-Example)
 * #### [Flex & Bison](#Flex-&-Bison)
 
+#### <a name="About">About</a> 
+Routin is a programming language designed to help users create habits and build a solid routine. It helps you easily check for free time in your schedule and match free time hours with friends and family. Some key features are:
+
+* **Interpreted language:** Easy to run and test.
+* **Productivity focus:** Native methods to help you have a more productive day.
+* **Syntax inspiration:** Inspired by Lua and Python.
+* **Time management:** Represents hours of the day as integers (0 to 24) and measures task duration in hours.
+
 #### <a name="EBNF">EBNF</a> 
-
-
 ```python
 PROGRAM   = { BLOCK };
 BLOCK     = { STATEMENT };
-STATEMENT = (ASSIGNMENT | VARIABLE_DECLARATION | DISPLAY | WHILE | IF | ROUTINE | AVAILABLITY), "\n";
+STATEMENT = (ASSIGNMENT | VARIABLE_DECLARATION | DISPLAY | WHILE | IF | ROUTINE | AVAILABILITY), "\n";
 
 ASSIGNMENT           = IDENTIFIER, "=", BOOLEXPRESSION;
 VARIABLE_DECLARATION = "local", IDENTIFIER, [ "=", BOOLEXPRESSION ] ;
 DISPLAY              = "display", "(", BOOLEXPRESSION, ")";
 WHILE                = "while", BOOLEXPRESSION, "do", "\n", {STATEMENT}, "end", "\n";
-IF                   = "if", BOOLEXPRESSION, "then", "\n", {STATEMENT}, ["else", "\n", {STATEMENT}], "end", "\n";
-ROUTINE              = "routine", IDENTIFIER, ["=", "(", "[", { ")",BOOLEXPRESSION, ",", INT, "("},"]", "|", "[", { ")",INT, "-", INT, "("}, "]", ")"], "\n";
-AVAILABLITY          = "availability", "(",IDENTIFIER, ",",INT, ")";
+IF                   = "if", BOOLEXPRESSION, "then", "\n", {STATEMENT}, ["else", "\n", {STATEMENT}], "end", "\n;
+ROUTINE              = "routine", IDENTIFIER, ["=", "(", "[", { ")",BOOLEXPRESSION, ",", INT, "("},"]", "|", "[", { ")",INT, "-", INT, "("}, "]", ")"], "\n;
+AVAILABILITY         = "availability", "(",IDENTIFIER, ",",INT, ")";
 
 BOOLEXPRESSION = BOOLTERM, {"or", BOOLTERM};
 BOOLTERM       = RELEXPRESSION, {"and", RELEXPRESSION};
@@ -36,44 +43,70 @@ READ           = "read", "(", ")";
 IDENTIFIER     = LETTER, {LETTER | DIGIT | "_"};
 INT            = DIGIT, {DIGIT};
 STRING         = {LETTER | DIGIT };
+
 ```
 
 ![EBNF](Images/EBNF2.png)
 
 
-Routin is a programming language designed to help users create habits and build a solid routine. Some key points worth noting are:
+#### <a name="Code-Example">Code Example</a> 
 
+Some key points worth noting are:
 * The hours of the day are represented as integers, ranging from 0 to 24, where 0 corresponds to the beginning of the day and 24 to the end (midnight).
 * The time required to complete a task is also measured in hours. For example, specifying 1 would indicate a duration of 1 hour.
 Here's an example of how to use it:
 
 
 ```python
-# In the routine below, the user aims to spend 1 hour reading, 2 hours at the gym, and 4 hours studying.
-# However, there are intervals where they cannot perform these tasks: from midnight to 6 in the morning,
-# from 13:00 to 16:00, and from 21:00 to midnight. The software will organize the routine to accommodate these hour restrictions.
-routine = (
-  [("read book", 1), ("gym", 2), ("study", 4)] |
-  [(0-6), (13-16), (21-24)])
-```
+local my_routine
+routine my_routine = (
+  [("read book", 1), ("gym", 2), ("study", 4)],
+  [(0,6), (13,16), (21,24)])
 
-```python
-# Let's suppose one possible solution for this routine would be:
-# 7-8   -> read book;
-# 8-12  -> study;
-# 17-18 -> gym;
-# So the following code would display:
 
-int i
-while i < 25:
-  if availability(routine, i):
-    display(i)
-  end
+local i = 0
+while i < 25 {
+  if availability(my_routine, i) {
+    print(i)
+  }
   i = i + 1
-end
+}
 
-$19
-$20
+print(my_routine)
+
+my_routine.add_task("meeting", 2)
+my_routine.del_task("study")
+
+local j = 0
+while j < 25 {
+  if availability(my_routine, j) {
+    print(j)
+  }
+  j = j + 1
+}
+
+print(my_routine)
+
+
+-------------------------------------------
+16
+17
+18
+19
+20
+Free time: [16, 17, 18, 19, 20]
+Tasks time: [('study', 6, 10), ('gym', 10, 12), ('read book', 12, 13)]
+
+
+6
+7
+8
+9
+18
+19
+20
+Free time: [6, 7, 8, 9, 18, 19, 20]
+Tasks time: [('gym', 10, 12), ('read book', 12, 13), ('meeting', 16, 18)]
 ```
 
 #### <a name="Flex-&-Bison">Flex & Bison</a> 
