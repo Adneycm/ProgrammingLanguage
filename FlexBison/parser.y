@@ -7,17 +7,22 @@ void yyerror(const char *s);
 %token IF
 %token ELSE
 %token DOTS
+%token DOT
 %token WHILE
 %token END
 %token DISPLAY
 %token ROUTINE
 %token AVAILABILITY
+%token ADDTASK
+%token DELTASK
 %token LOCAL
 %token READ
 %token LPAREN
 %token RPAREN
 %token LBRACK
 %token RBRACK
+%token LCRACK
+%token RCRACK
 %token PIPE
 %token COMMA
 %token EQ
@@ -53,6 +58,8 @@ statement : assignment
           | if
           | routine 
           | availability
+          | add_task
+          | del_task
           | NEWLINE
           ;
 
@@ -63,15 +70,14 @@ assignment : IDENTIFIER ASSIGN bexpression NEWLINE
 
 display : DISPLAY LPAREN bexpression RPAREN NEWLINE;
 
-while : WHILE bexpression DOTS block END NEWLINE;
+while : WHILE bexpression LCRACK block RCRACK NEWLINE;
 
-
-if : IF bexpression DOTS block END NEWLINE
-   | IF bexpression DOTS block ELSE DOTS block END NEWLINE
+if : IF bexpression LCRACK block RCRACK NEWLINE
+   | IF bexpression LCRACK block ELSE LCRACK block RCRACK NEWLINE
    ;
 
 routine : ROUTINE IDENTIFIER NEWLINE
-        | ROUTINE IDENTIFIER ASSIGN LPAREN LBRACK routine_param_list RBRACK PIPE LBRACK routine_restriction_param_list RBRACK RPAREN NEWLINE
+        | ROUTINE IDENTIFIER ASSIGN LPAREN LBRACK routine_param_list RBRACK COMMA LBRACK routine_restriction_param_list RBRACK RPAREN NEWLINE
 
 
 routine_param_list : routine_param COMMA routine_param_list
@@ -82,7 +88,6 @@ routine_param : LPAREN bexpression COMMA INT RPAREN
               | /* empty */
               ;
 
-
 routine_restriction_param_list : routine_restriction_param COMMA routine_restriction_param_list
                                | routine_restriction_param
                                ;
@@ -91,8 +96,14 @@ routine_restriction_param : LPAREN INT COMMA INT RPAREN
                           | /* empty */
                           ;
 
+availability : AVAILABILITY LPAREN IDENTIFIER COMMA value RPAREN;
 
-availability : AVAILABILITY LPAREN IDENTIFIER COMMA INT RPAREN NEWLINE;
+value : INT
+      | IDENTIFIER
+      ;
+
+add_task : IDENTIFIER DOT ADDTASK LPAREN STRING COMMA INT RPAREN NEWLINE;
+del_task : IDENTIFIER DOT DELTASK LPAREN STRING RPAREN NEWLINE;
 
 bexpression : bexpression OR bterm
             | bterm
@@ -126,6 +137,7 @@ factor : PLUS factor
        | LPAREN bexpression RPAREN
        | IDENTIFIER 
        | READ LPAREN RPAREN
+       | availability
       ;
 
 %%
@@ -133,10 +145,10 @@ factor : PLUS factor
 void yyerror(const char *s) {
     extern int yylineno;
     extern char *yytext;
-
     /* mensagem de erro exibe o símbolo que causou erro e o número da linha */
     printf("\nErro (%s): símbolo \"%s\" (linha %d)\n", s, yytext, yylineno);
 }
+
 
 int main() {
     yyparse();
